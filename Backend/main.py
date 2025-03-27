@@ -6,8 +6,11 @@ import os
 
 app = FastAPI()
 
-ES_SERVER = os.environ.get("ES_HOST", "http://localhost:9200")
-client = Elasticsearch(ES_SERVER)
+ES_SERVER = os.environ.get("ES_HOST", "http://es_container:9200")
+client = Elasticsearch(
+    ES_SERVER,
+    basic_auth=("elastic", "newpassword")
+)
 INDEX = "docs_collection"
 
 def initialize_index():

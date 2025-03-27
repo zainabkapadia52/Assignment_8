@@ -33,7 +33,7 @@
     document.getElementById("searchForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       const query = document.getElementById("queryInput").value;
-      const response = await fetch(/get/$,{query});
+      const response = await fetch(`/search/${encodeURIComponent(query)}`);
       const result = await response.json();
       document.getElementById("resultArea").innerText = JSON.stringify(result, null, 2);
     });
@@ -42,7 +42,7 @@
     document.getElementById("insertForm").addEventListener("submit", async function(e) {
       e.preventDefault();
       const text = document.getElementById("textInput").value;
-      const response = await fetch(/insert/$,{text});
+      const response = await fetch(`/add/${encodeURIComponent(text)}`);
       const result = await response.json();
       document.getElementById("resultArea").innerText = JSON.stringify(result, null, 2);
     });
