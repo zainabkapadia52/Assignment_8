@@ -34,7 +34,7 @@ async def search_document(term: str):
 async def add_document(content: str):
     new_id = str(uuid4())
     document = {"doc_id": new_id, "content": content}
-    response = client.index(index=INDEX, id=new_id, document=document)
+    response = client.index(index=INDEX, id=new_id, document=document, refresh=True)
     return {"status": response["result"], "id": new_id}
 
 if __name__ == "__main__":
