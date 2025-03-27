@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FastAPI & Elasticsearch Connector</title>
+</head>
+<body>
+  <h2>Document Management</h2>
+
+  <!-- Form to search documents -->
+  <section id="searchSection">
+    <form id="searchForm">
+      <label for="queryInput">Search Document:</label>
+      <input type="text" id="queryInput" placeholder="Enter your search term">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <!-- Form to add new documents -->
+  <section id="insertSection">
+    <form id="insertForm">
+      <label for="textInput">Add New Document:</label>
+      <textarea id="textInput" rows="4" cols="50" placeholder="Type your document content here"></textarea>
+      <br>
+      <button type="submit">Insert</button>
+    </form>
+  </section>
+
+  <div id="resultArea"></div>
+
+  <script>
+    // Handle the search functionality
+    document.getElementById("searchForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const query = document.getElementById("queryInput").value;
+      const response = await fetch(/get/$,{query});
+      const result = await response.json();
+      document.getElementById("resultArea").innerText = JSON.stringify(result, null, 2);
+    });
+
+    // Handle the document insertion functionality
+    document.getElementById("insertForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const text = document.getElementById("textInput").value;
+      const response = await fetch(/insert/$,{text});
+      const result = await response.json();
+      document.getElementById("resultArea").innerText = JSON.stringify(result, null, 2);
+    });
+  </script>
+</body>
+</html>
