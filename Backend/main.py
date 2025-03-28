@@ -11,7 +11,6 @@ client = Elasticsearch(
     ES_SERVER,
     basic_auth=("elastic", "newpassword")
 )
-INDEX = "docs_collection"
 
 def initialize_index():
     if not client.indices.exists(index=INDEX):
